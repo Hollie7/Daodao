@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzb.hello.mapper.WordMapper">
+    <select id="queryWordByWord" resultType="Word">
+        select * from talkrobot.emotionwordlibrary where WordSelf = #{WordSelf}
+    </select>
+
+    <select id="getAllWords" resultType="Word">
+        select wordSelf, wordClass, wordMeanNum, wordMeanIndex, emotionClass, emotionIntensity, emotionPolarity from talkrobot.emotionwordlibrary
+    </select>
+
+    <select id="findVeryWord" resultType="VeryWord">
+        select * from talkrobot.very_dict where very = #{very}
+    </select>
+
+    <select id="findMostWord" resultType="MostWord">
+        select * from talkrobot.most_dict where most = #{most}
+    </select>
+
+    <select id="findMoreWord" resultType="MoreWord">
+        select * from talkrobot.more_dict where more = #{more}
+    </select>
+
+    <select id="findOverWord" resultType="OverWord">
+        select * from talkrobot.over_dict where overword = #{overword}
+    </select>
+
+    <select id="findIshWord" resultType="IshWord">
+        select * from talkrobot.ish_dict where ish = #{ish}
+    </select>
+
+    <select id="findInverseWord" resultType="InverseWord">
+        select * from talkrobot.inverse_dict where inverse = #{inverse}
+    </select>
+
+    <select id="findInsufficientlyWord" resultType="InsufficientlyWord">
+        select * from talkrobot.insufficiently_dict where insufficiently = #{insufficiently}
+    </select>
+
+    <select id="findNegWord" resultType="NegWord">
+        select * from talkrobot.neg_dict where neg = #{neg}
+    </select>
+
+    <select id="findPosWord" resultType="PosWord">
+        select * from talkrobot.pos_dict where pos = #{pos}
+    </select>
+
+</mapper>
