@@ -22,6 +22,13 @@ public class SpringController {
             "平常大多是不高兴也不悲伤的情绪，看过一些心理学的书，怀疑自己可能有神经症，大一暑假去号脉的时候，医生说我有神经官能紊乱，那时候就有点不开心，" +
             "现在情绪的情况这样，要不要去看医生吃药？真的好难受啊。" ;
 
+    String[][] InitialSegment;
+    String[][] SegmentFilterWords;
+    List<String[]> WordsClass;
+    String[][] WordsSort;
+    List<String[][]> PosNegWords;
+    double EmotionScore;
+    String[][] WordsEmotionClass;
 
     @Autowired
     private WordMapper wordMapper;
@@ -51,7 +58,10 @@ public class SpringController {
 
         //将词语按照出现次数排序，返回词语及其数量，用作绘制词云图，需要返回给小程序
         String[][] SortWords = Segment.WordSort(Words);
-        System.out.println(Arrays.toString(SortWords[0])+" "+Arrays.toString(SortWords[1]));
+        for (int i = 0; i < SortWords[0].length; i++) {
+            System.out.println(SortWords[0][i]+" "+SortWords[1][i]);
+        }
+        //System.out.println(Arrays.toString(SortWords[0])+" "+Arrays.toString(SortWords[1]));
 
         //词语分类，筛选出正向词、负向词及各自的前一个词，用作后续计算情感值
         List<String[][]> FilterWords = Evaluate.WordFilter(Words, wordMapper);
@@ -86,11 +96,94 @@ public class SpringController {
         List<Word> selectWord;
         for (int i = 0; i < wordNum; i++) {
             selectWord = wordMapper.queryWordByWord(wordsDivided[0][i]);
-            if(selectWord == null) continue;
+            if(selectWord == null) {
+                continue;
+            }
             System.out.print(selectWord.get(0).wordSelf+' '+selectWord.get(0).wordClass+' '+selectWord.get(0).emotionClass);
             System.out.println();
         }
         System.out.println("success");
         return  "success";
+    }
+
+    //处理所有步骤，获得需要的所有变量值
+    @RequestMapping("/DoneAll")
+    public String DoneAll(){
+        //初始分词结果，包括词语及其词性
+        InitialSegment = Segment.SegmentWord(str);
+
+        //仅保留名词、动词、形容词、副词、数词和成语，包括词语及其词性
+        SegmentFilterWords = Segment.SegmentFilter(InitialSegment);
+
+        //依据名词、动词、形容词、副词、数词、成语顺序归纳整理词语，只包括词语
+        WordsClass = Segment.WordClass(InitialSegment);
+
+        //仅保留动词、名词、形容词、副词、数词（包括时间）和成语及代词，仅包括词语
+        String[] Words = SegmentFilterWords[0];
+
+        //将词语按照出现次数排序，返回词语及其数量，用作绘制词云图，需要返回给小程序
+        WordsSort = Segment.WordSort(Words);
+        for (int i = 0; i < WordsSort[0].length; i++) {
+            System.out.println(WordsSort[0][i]+" "+WordsSort[1][i]);
+        }
+
+        //词语分类，筛选出正向词、负向词及各自的前一个词，用作后续计算情感值
+        PosNegWords = Evaluate.WordFilter(Words, wordMapper);
+        String[][] FinalPos = PosNegWords.get(0);
+        String[][] FinalNeg = PosNegWords.get(1);
+        System.out.println("正向词"+Arrays.toString(FinalPos[0]) +" "+ Arrays.toString(FinalPos[1]));
+        System.out.println("负向词"+Arrays.toString(FinalNeg[0]) +" "+ Arrays.toString(FinalNeg[1]));
+
+        //计算情感值，需要返回给小程序
+        EmotionScore = Evaluate.EmotionScore(PosNegWords, wordMapper);
+        System.out.println(EmotionScore);
+
+        //情感分类，情感类型呈现，需要返回给小程序
+        WordsEmotionClass = Evaluate.EmotionClassArray(SegmentFilterWords, wordMapper);
+        System.out.println(Arrays.toString(WordsEmotionClass[0]) +" "+ Arrays.toString(WordsEmotionClass[1]));
+
+        return "Operate Successfully";
+    }
+
+    //初始分词结果
+    @RequestMapping("/InitialSegment")
+    public String[][] InitialSegment(){
+        return InitialSegment;
+    }
+
+    //初筛后的分词结果
+    @RequestMapping("/SegmentFilter")
+    public String[][] SegmentFilter(){
+        return SegmentFilterWords;
+    }
+
+    //按照词性分类的词语结果
+    @RequestMapping("/WordsClass")
+    public List<String[]> WordsClass(){
+        return WordsClass;
+    }
+
+    //按照词语出现频率排序的结果
+    @RequestMapping("/WordsSort")
+    public String[][] WordsSort(){
+        return WordsSort;
+    }
+
+    //正负词性分类
+    @RequestMapping("/PosNegWords")
+    public List<String[][]> PosNegWords(){
+        return PosNegWords;
+    }
+
+    //情感分数
+    @RequestMapping("/EmotionScore")
+    public double EmotionScore(){
+        return EmotionScore;
+    }
+
+    //情感分类
+    @RequestMapping("/WordsEmotionClass")
+    public String[][] WordsEmotionClass(){
+        return WordsEmotionClass;
     }
 }

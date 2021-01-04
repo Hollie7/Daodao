@@ -15,14 +15,30 @@ public class Evaluate {
         IshWord ish = wordMapper.findIshWord(word);
         InverseWord inverse = wordMapper.findInverseWord(word);
         InsufficientlyWord insufficiently = wordMapper.findInsufficientlyWord(word);
-        if(most!=null) return 2;
-        else if(over!=null) return 1.5;
-        else if(very!=null) return 1.25;
-        else if(more!=null) return 1.2;
-        else if(ish!=null) return 0.8;
-        else if(insufficiently!=null) return 0.5;
-        else if(inverse!=null) return -1;
-        else return 1;
+        if(most!=null) {
+            return 2;
+        }
+        else if(over!=null) {
+            return 1.5;
+        }
+        else if(very!=null) {
+            return 1.25;
+        }
+        else if(more!=null) {
+            return 1.2;
+        }
+        else if(ish!=null) {
+            return 0.8;
+        }
+        else if(insufficiently!=null) {
+            return 0.5;
+        }
+        else if(inverse!=null) {
+            return -1;
+        }
+        else {
+            return 1;
+        }
     }
 
     //输入参数为分词的词语的一维数组，筛选出neg词和pos词，及各自的前置副词
@@ -108,7 +124,9 @@ public class Evaluate {
             selectWord = wordMapper.queryWordByWord(SegmentFilter[0][i]);
             String preWord = SegmentFilter[0][i-1];
             String ClassWord = "";
-            if(selectWord.size() == 0) continue;
+            if(selectWord.size() == 0) {
+                continue;
+            }
             //如果情绪词数目1
             else if(selectWord.size() == 1){
                 EmoClass.add(selectWord.get(0).emotionClass);
@@ -127,7 +145,9 @@ public class Evaluate {
                     }
                 }
             }
-            if(wordMapper.findInverseWord(preWord) != null) inverseWords.add(ClassWord);
+            if(wordMapper.findInverseWord(preWord) != null) {
+                inverseWords.add(ClassWord);
+            }
         }
 
         //long time2 = System.currentTimeMillis();
@@ -184,8 +204,9 @@ public class Evaluate {
             //selectWord = wordMapper.queryWordByWord(SegmentFilter[0][i]);
             String preWord = SegmentFilter[0][i-1];
             String ClassWord = "";
-            if(wordIndex == null) continue;
-            else if(wordIndex.length == 1){
+            if(wordIndex == null) {
+                continue;
+            } else if(wordIndex.length == 1){
                 EmoClass.add(AllWordsString[4][wordIndex[0]]);
                 ClassWord = AllWordsString[4][wordIndex[0]];
                 //System.out.println(SegmentFilter[0][i]+" "+ClassWord);
@@ -201,7 +222,9 @@ public class Evaluate {
                     }
                 }
             }
-            if(wordMapper.findInverseWord(preWord) != null) inverseWords.add(ClassWord);
+            if(wordMapper.findInverseWord(preWord) != null) {
+                inverseWords.add(ClassWord);
+            }
         }
 
         long time2 = System.currentTimeMillis();
