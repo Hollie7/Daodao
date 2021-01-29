@@ -98,5 +98,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.ansj:ansj_seg:5.1.6" level="project" />
     <orderEntry type="library" name="Maven: org.nlpcn:nlp-lang:1.7.8" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.75" level="project" />
   </component>
 </module>

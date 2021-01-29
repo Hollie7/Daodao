@@ -260,21 +260,21 @@ public class Evaluate {
     }
 
     //对第一列为词语、第二列为词语数量的String数组按照数量多少排序
-    public static void FinalSort(String[][] WordsEmotionClass) {
-        if(WordsEmotionClass != null && WordsEmotionClass[0].length > 1){
-            for(int i = 0; i < WordsEmotionClass[0].length - 1; i++){
+    public static void FinalSort(String[][] Array) {
+        if(Array != null && Array[0].length > 1){
+            for(int i = 0; i < Array[0].length - 1; i++){
                 // 初始化一个布尔值
                 boolean flag = true;
-                for(int j = 0; j < WordsEmotionClass[0].length - i - 1 ; j++){
-                    if(Integer.parseInt(WordsEmotionClass[1][j]) < Integer.parseInt(WordsEmotionClass[1][j+1])){
+                for(int j = 0; j < Array[0].length - i - 1 ; j++){
+                    if(Integer.parseInt(Array[1][j]) < Integer.parseInt(Array[1][j+1])){
                         String classTemp;
                         String numTemp;
-                        classTemp = WordsEmotionClass[0][j];
-                        WordsEmotionClass[0][j] = WordsEmotionClass[0][j+1];
-                        WordsEmotionClass[0][j+1] = classTemp;
-                        numTemp = WordsEmotionClass[1][j];
-                        WordsEmotionClass[1][j] = WordsEmotionClass[1][j+1];
-                        WordsEmotionClass[1][j+1] = numTemp;
+                        classTemp = Array[0][j];
+                        Array[0][j] = Array[0][j+1];
+                        Array[0][j+1] = classTemp;
+                        numTemp = Array[1][j];
+                        Array[1][j] = Array[1][j+1];
+                        Array[1][j+1] = numTemp;
                         // 改变flag
                         flag = false;
                     }
@@ -284,6 +284,147 @@ public class Evaluate {
                 }
             }
         }
+    }
+
+    //对第一列为小类情感（NE、PA等)、第二列为该类数目的String数组计算大类的数目并排序
+    public static String LargeEmotionClass(String[][] WordsEmotionClassArray){
+        int num = WordsEmotionClassArray[0].length;
+        int[] LargeNum = new int[7];
+        String[][] LargeEmotion = new String[2][7];
+        String[] ChineseDescribe = new String[num];
+        LargeEmotion[0][0] = "乐";
+        LargeEmotion[0][1] = "好";
+        LargeEmotion[0][2] = "怒";
+        LargeEmotion[0][3] = "哀";
+        LargeEmotion[0][4] = "惧";
+        LargeEmotion[0][5] = "恶";
+        LargeEmotion[0][6] = "惊";
+
+        for (int i = 0; i < num; i++) {
+            int EmotionNum = Integer.parseInt(WordsEmotionClassArray[1][i]);
+            switch (WordsEmotionClassArray[0][i]){
+                case "PA":
+                    ChineseDescribe[i] = "快乐";
+                    LargeNum[0] += EmotionNum;
+                    break;
+                case "PE":
+                    ChineseDescribe[i] = "安心";
+                    LargeNum[0] += EmotionNum;
+                    break;
+                case "PD":
+                    ChineseDescribe[i] = "尊敬";
+                    LargeNum[1] += EmotionNum;
+                    break;
+                case "PH":
+                    ChineseDescribe[i] = "赞扬";
+                    LargeNum[1] += EmotionNum;
+                    break;
+                case "PG":
+                    ChineseDescribe[i] = "相信";
+                    LargeNum[1] += EmotionNum;
+                    break;
+                case "PB":
+                    ChineseDescribe[i] = "喜爱";
+                    LargeNum[1] += EmotionNum;
+                    break;
+                case "PK":
+                    ChineseDescribe[i] = "祝愿";
+                    LargeNum[1] += EmotionNum;
+                    break;
+                case "NA":
+                    ChineseDescribe[i] = "愤怒";
+                    LargeNum[2] += EmotionNum;
+                    break;
+                case "NB":
+                    ChineseDescribe[i] = "悲伤";
+                    LargeNum[3] += EmotionNum;
+                    break;
+                case "NJ":
+                    ChineseDescribe[i] = "失望";
+                    LargeNum[3] += EmotionNum;
+                    break;
+                case "NH":
+                    ChineseDescribe[i] = "内疚";
+                    LargeNum[3] += EmotionNum;
+                    break;
+                case "PF":
+                    ChineseDescribe[i] = "思";
+                    LargeNum[3] += EmotionNum;
+                    break;
+                case "NI":
+                    ChineseDescribe[i] = "慌";
+                    LargeNum[4] += EmotionNum;
+                    break;
+                case "NC":
+                    ChineseDescribe[i] = "恐惧";
+                    LargeNum[4] += EmotionNum;
+                    break;
+                case "NG":
+                    ChineseDescribe[i] = "羞";
+                    LargeNum[4] += EmotionNum;
+                    break;
+                case "NE":
+                    ChineseDescribe[i] = "烦闷";
+                    LargeNum[5] += EmotionNum;
+                    break;
+                case "ND":
+                    ChineseDescribe[i] = "憎恶";
+                    LargeNum[5] += EmotionNum;
+                    break;
+                case "NN":
+                    ChineseDescribe[i] = "贬责";
+                    LargeNum[5] += EmotionNum;
+                    break;
+                case "NK":
+                    ChineseDescribe[i] = "妒忌";
+                    LargeNum[5] += EmotionNum;
+                    break;
+                case "NL":
+                    ChineseDescribe[i] = "怀疑";
+                    LargeNum[5] += EmotionNum;
+                    break;
+                case "PC":
+                    ChineseDescribe[i] = "惊奇";
+                    LargeNum[6] += EmotionNum;
+                    break;
+            }
+        }
+        LargeEmotion[1][0] = "" + LargeNum[0];
+        LargeEmotion[1][1] = "" + LargeNum[1];
+        LargeEmotion[1][2] = "" + LargeNum[2];
+        LargeEmotion[1][3] = "" + LargeNum[3];
+        LargeEmotion[1][4] = "" + LargeNum[4];
+        LargeEmotion[1][5] = "" + LargeNum[5];
+        LargeEmotion[1][6] = "" + LargeNum[6];
+        for (int i = 0; i < 7; i++) {
+            System.out.println(LargeNum[i]);
+        }
+
+        FinalSort(LargeEmotion);
+        String Describe;
+        switch (ChineseDescribe.length){
+            case 1:
+                Describe = "你总体感觉到" + LargeEmotion[0][0] + "，感觉" + ChineseDescribe[0];
+                break;
+            case 2:
+                Describe = "你总体感觉到" + LargeEmotion[0][0] + "，感觉" + ChineseDescribe[0] + "、" + ChineseDescribe[1];
+                break;
+            case 3:
+                Describe = "你总体感觉到" + LargeEmotion[0][0] + "，感觉" + ChineseDescribe[0] + "、" + ChineseDescribe[1] + "、" + ChineseDescribe[2];
+                break;
+            case 4:
+                Describe = "你总体感觉到" + LargeEmotion[0][0] + "，感觉" + ChineseDescribe[0] + "、" + ChineseDescribe[1]
+                        + "，同时内心还有些" + ChineseDescribe[2] + "、" + ChineseDescribe[3];
+                break;
+            case 5:
+                Describe = "你总体感觉到" + LargeEmotion[0][0] + "，感觉" + ChineseDescribe[0] + "、" + ChineseDescribe[1]
+                        + "，同时内心还有些" + ChineseDescribe[2] + "、" + ChineseDescribe[3] + "、" + ChineseDescribe[4];
+                break;
+            default:
+                Describe = "你总体感觉到" + LargeEmotion[0][0] + "，感觉" + ChineseDescribe[0] + "、" + ChineseDescribe[1] + "和" + ChineseDescribe[2]
+                        + "，同时内心还有些" + ChineseDescribe[3] + "、" + ChineseDescribe[4] + "、" + ChineseDescribe[5];
+        }
+        return Describe;
     }
 }
 

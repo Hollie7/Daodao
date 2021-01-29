@@ -67,6 +67,14 @@
 			<artifactId>nlp-lang</artifactId>
 			<version>1.7.8</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.75</version>
+		</dependency>
+
 	</dependencies>
 
 
