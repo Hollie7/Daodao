@@ -1,0 +1,78 @@
+/**index.wxss**/
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.buttons {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn1 {
+  width: 60%;
+  height: 8vh;
+  background-color:rgb(144, 230, 245);
+  color: rgb(31, 29, 29);
+  border-radius: 100rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn1_hover {
+  background-color:rgb(82, 218, 241);
+}
+
+.btn2 {
+  width: 80%;
+  margin-top: 50rpx;
+  background-color:rgb(113, 167, 247);
+  color: rgb(31, 29, 29);
+  border-radius: 100rpx;
+
+}
+
+.btn2_hover {
+  background-color:rgb(87, 152, 250);
+}
+
+.btn3 {
+  width: 80%;
+  margin-top: 50rpx;
+  background-color:rgb(113, 167, 247);
+  color: rgb(31, 29, 29);
+  border-radius: 100rpx;
+}
+
+.btn3_hover {
+  background-color:rgb(87, 152, 250);
+}
+.btnImg {
+  margin-right: 0rpx;
+  margin-top: 0rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.btn1::after {
+  border-radius: 98rpx;
+  border: 0; 
+}

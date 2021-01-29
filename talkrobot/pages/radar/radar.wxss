@@ -1,0 +1,28 @@
+/* pages/radar/radar.wxss */
+.qiun-charts {
+  padding-top: 200rpx;
+  width: 750rpx;
+  height: 750rpx;
+  background-color: #FFFFFF;
+}
+.charts {
+  width: 750rpx;
+  height: 750rpx;
+  background-color: #FFFFFF;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.btn {
+  width: 30vw;
+  background-color:rgb(144, 230, 245);
+  color: rgb(31, 29, 29);
+  border-radius: 10rpx;
+}
+
+.btn_hover {
+  background-color:rgb(82, 218, 241);
+}

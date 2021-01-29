@@ -1,0 +1,12 @@
+<!--pages/wordcloud.wxml-->
+<view class="qiun-columns" style="width:100vw; height:100vh">
+	<view class="qiun-charts" >
+    <canvas canvas-id="canvasWord" class="charts"></canvas>
+	</view>
+	<view class="buttons">
+		<button class="btn" hover-class="btn_hover" bindtap="ToRadar">情感分析</button>
+		<button class="btn" hover-class="btn_hover" bindtap="ToIndex">返回主页</button>
+		<button class="btn" hover-class="btn_hover" bindtap="ToScore">情绪分析</button>
+	</view>
+</view>
+

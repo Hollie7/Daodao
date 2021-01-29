@@ -1,0 +1,13 @@
+<!--pages/radar/radar.wxml-->
+<!--pages/wordcloud.wxml-->
+<view class="qiun-columns">
+	<view class="qiun-charts" >
+    <canvas canvas-id="canvasRadar" id="canvasRadar" class="charts"></canvas>
+  </view>
+  <view class="buttons">
+		<button class="btn" hover-class="btn_hover" bindtap="ToWordCloud">词云图</button>
+		<button class="btn" hover-class="btn_hover" bindtap="ToIndex">返回主页</button>
+		<button class="btn" hover-class="btn_hover" bindtap="ToScore">情绪分析</button>
+	</view>
+</view>
+
