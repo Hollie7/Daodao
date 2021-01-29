@@ -9,7 +9,8 @@ Page({
     cWidth:'',
     cHeight:'',
     pixelRatio:1,
-    score1:0
+    score1:0,
+    describe1:''
   },
 
   onLoad: function () {
@@ -23,7 +24,9 @@ Page({
     let Radar={categories:[],series:[]};       
     Radar.categories = app.globalData.backEndData.RadarPlot.categories;
     Radar.series = [app.globalData.backEndData.RadarPlot.series];
-
+    this.setData({
+      describe1:app.globalData.backEndData.EmotionDescribe
+    })
 
     _self.showRadar("canvasRadar",Radar);
   },

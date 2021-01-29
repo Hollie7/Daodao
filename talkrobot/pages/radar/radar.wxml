@@ -4,6 +4,7 @@
 	<view class="qiun-charts" >
     <canvas canvas-id="canvasRadar" id="canvasRadar" class="charts"></canvas>
   </view>
+	<view>{{describe1}}</view>
   <view class="buttons">
 		<button class="btn" hover-class="btn_hover" bindtap="ToWordCloud">词云图</button>
 		<button class="btn" hover-class="btn_hover" bindtap="ToIndex">返回主页</button>

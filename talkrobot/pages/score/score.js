@@ -8,6 +8,7 @@ Page({
     cHeight:'',
     pixelRatio:1,
     score1:0,
+    describe1:''
   },
 
   onLoad: function () {
@@ -20,7 +21,8 @@ Page({
  
   getServerData:function(){
     this.setData({
-      score1:app.globalData.backEndData.EmotionScore
+      score1:app.globalData.backEndData.EmotionScore,
+      describe1:app.globalData.backEndData.EmotionDescribe
     })
   },
 
