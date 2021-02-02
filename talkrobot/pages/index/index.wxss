@@ -18,7 +18,6 @@
 }
 
 .buttons {
-  width: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,8 +25,7 @@
 }
 
 .btn1 {
-  width: 60%;
-  height: 8vh;
+  width: 30vw;
   background-color:rgb(144, 230, 245);
   color: rgb(31, 29, 29);
   border-radius: 100rpx;
@@ -42,29 +40,17 @@
 }
 
 .btn2 {
-  width: 80%;
+  width: 30vw;
   margin-top: 50rpx;
   background-color:rgb(113, 167, 247);
   color: rgb(31, 29, 29);
   border-radius: 100rpx;
-
 }
 
 .btn2_hover {
   background-color:rgb(87, 152, 250);
 }
 
-.btn3 {
-  width: 80%;
-  margin-top: 50rpx;
-  background-color:rgb(113, 167, 247);
-  color: rgb(31, 29, 29);
-  border-radius: 100rpx;
-}
-
-.btn3_hover {
-  background-color:rgb(87, 152, 250);
-}
 .btnImg {
   margin-right: 0rpx;
   margin-top: 0rpx;

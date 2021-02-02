@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/logs/logs",
     "pages/wordcloud/wordcloud",
@@ -20,6 +21,5 @@
       "provider": "wx069ba97219f66d99"
     }
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

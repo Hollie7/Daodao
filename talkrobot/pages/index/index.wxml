@@ -14,7 +14,8 @@
       <view>录音</view>
     </button>
     <button class="btn2" hover-class="btn2_hover" bindtap="change">开始分析</button>
-    <button class="btn3" hover-class="btn3_hover" bindtap="ToWordcloud" disabled="{{btn3_judge}}">查看结果</button>
+    <button class="btn2" hover-class="btn2_hover" bindtap="ToWordcloud" disabled="{{btn3_judge}}">查看结果</button>
+    <button class="btn2" hover-class="btn2_hover" bindtap="Reset">Reset</button>
   </view>
   <view>{{text_now}}</view>
 </view>

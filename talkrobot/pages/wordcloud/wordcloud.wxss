@@ -17,10 +17,10 @@
   justify-content: space-around;
 }
 .btn {
-  width: 30vw;
+  width: 25vw;
   background-color:rgb(144, 230, 245);
   color: rgb(31, 29, 29);
-  border-radius: 10rpx;
+  border-radius: 20rpx;
 }
 
 .btn_hover {
