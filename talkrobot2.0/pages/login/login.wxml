@@ -1,0 +1,28 @@
+<view class="container">
+  <image class="backImage" src="../../icon/background2.png"></image>
+  <text class="welcome">欢迎使用吐槽机器人</text>
+  <view class="login-from">
+ 
+    <!--账号-->
+    <view class="inputView">
+      <image class="nameImage" src="../../icon/name.png"></image>
+      <text class="loginLab">昵称</text>
+      <input class="inputText" placeholder="请输入昵称" bindinput="nameInput" type='text' />
+    </view>
+    <view class="line"></view>
+ 
+    <!--密码-->
+    <view class="inputView">
+      <image class="codeImage" src="../../icon/code.png"></image>
+      <text class="loginLab">密码</text>
+      <input class="inputText" password="true" placeholder="请输入密码" bindinput="codeInput" type='password'/>
+    </view>
+ 
+    <!--按钮-->
+    <view class="loginBtnView">
+      <button class="loginBtn" hover-class="loginBtn_hover" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">登录</button>
+    </view>
+    <view class='goto'><navigator url='/pages/register/register'>还未注册？去注册</navigator> </view>
+    <view class='goto' bindtap="anonymity">匿名使用</view>
+  </view>
+</view>

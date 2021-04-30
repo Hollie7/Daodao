@@ -1,0 +1,26 @@
+<view class="container">
+  <image class="backImage" src="../../icon/background2.png"></image>
+  <text class="welcome">选项设置</text>
+
+  <view class="gender">
+    <text class="title">性别</text>
+    <radio-group class="radio-group" bindchange="genderChange">
+      <label class="radio" wx:for="{{gendersRadio}}">
+          <radio value="{{item.value}}"/>{{item.value}}
+      </label>
+    </radio-group>
+  </view>
+
+  <view class="scene">
+    <text class="title">场景</text>
+    <radio-group class="radio-group" bindchange="sceneChange">
+      <label class="radio" wx:for="{{scenesRadio}}">
+          <radio value="{{item.value}}"/>{{item.value}}
+      </label>
+    </radio-group>
+  </view>
+
+  <view class="btnView">
+      <button class="btn" hover-class="btn_hover" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="btnSure">确认</button>
+    </view>
+</view>

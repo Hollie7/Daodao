@@ -1,0 +1,41 @@
+/* pages/wordcloud.wxss */
+.qiun-charts {
+  padding-top: 200rpx;
+  width: 750rpx;
+  height: 750rpx;
+  background-color: #FFFFFF;
+}
+.charts {
+  width: 750rpx;
+  height: 750rpx;
+  background-color: #FFFFFF;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 37rpx;
+}
+.btn {
+  width: 30vw;
+  background-color:rgb(144, 230, 245);
+  color: rgb(31, 29, 29);
+  border-radius: 20rpx;
+  font-size: 35rpx;
+}
+
+.btn_center{
+  width: 30vw;
+  background-color:rgb(144, 230, 245);
+  color: rgb(31, 29, 29);
+  border-radius: 20rpx;
+  font-size: 35rpx;
+  margin-right: 5vw;
+  margin-left: 5vw;
+}
+
+.btn_hover {
+  background-color:rgb(82, 218, 241);
+}

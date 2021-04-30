@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="container" style="width:100vw; height:100vh">
+  <image class="backImage" src="{{backImg}}"></image>
+  <image class="character" src="{{characterImg}}"></image>
+  <view class="buttons">
+    <view class="buttons">
+      <button class="btn1" hover-class="btn1_hover" bindtouchstart="touchStart" bindtouchend="touchEnd"> 
+        <image class="btnImg" src="../../icon/luyin_1.png"></image>
+        <view>录音</view>
+      </button>
+      <!--<button class="btn2" hover-class="btn2_hover" bindtap="change">开始分析</button>
+      
+      <button class="btn2" hover-class="btn2_hover" bindtap="ToWordcloud" disabled="{{btn3_judge}}">查看结果</button>-->
+      <button class="btn2" hover-class="btn2_hover" bindtap="ToVoice" >查看语音</button>
+      <button class="btn2" hover-class="btn2_hover" bindtap="Reset">Reset</button>
+      <button class="btn2" hover-class="btn2_hover" bindtap="ToRemark">评价</button>
+    </view>
+  </view>
+</view>

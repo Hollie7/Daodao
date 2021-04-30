@@ -1,0 +1,23 @@
+<!--pages/radar/radar.wxml-->
+<!--pages/wordcloud.wxml-->
+<view class="container">
+
+	<view class="service">
+		<view class="charts" >
+			<canvas canvas-id="canvasRadar" id="canvasRadar" class="charts"></canvas>
+		</view>
+
+		<!--情绪类型评价-->
+		<view class='remark'>
+			<text>{{describe1}}</text>
+		</view>
+
+	</view>
+
+	<view class="buttons">
+		<button class="btn" hover-class="btn_hover" bindtap="ToWordCloud">词云图</button>
+		<button class="btn_center" hover-class="btn_hover" bindtap="ToIndex">返回主页</button>
+		<button class="btn" hover-class="btn_hover" bindtap="ToScore">情感评分</button>
+	</view>
+
+</view>

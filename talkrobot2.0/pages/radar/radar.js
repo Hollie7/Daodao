@@ -1,0 +1,102 @@
+// pages/mine/mine.js
+const app = getApp()
+import uCharts from '../uchart/u-charts.js';
+var _self;
+var canvasRadar=null;
+
+Page({
+  data: {
+    cWidth:'',
+    cHeight:'',
+    pixelRatio:1,
+    score1:0,
+    describe1:'',
+    backImg:"../../icon/场景1.png",
+    characterImg:"../../icon/男.png"
+  },
+
+  onLoad: function () {
+    _self=this;
+    this.cWidth = wx.getSystemInfoSync().windowWidth;
+    this.cHeight = 750 / 750 * wx.getSystemInfoSync().windowWidth;
+    this.getServerData();
+
+    if(app.globalData.gender == "男"){
+      this.setData({
+        characterImg:"../../icon/男.png"
+      })
+    }else{
+      this.setData({
+        characterImg:"../../icon/女.png"
+      })
+    }
+
+    if(app.globalData.scene == "场景1"){
+      this.setData({
+        backImg:"../../icon/场景1.png"
+      })
+    }else if(app.globalData.scene == "场景2"){
+      this.setData({
+        backImg:"../../icon/场景2.png"
+      })
+    }else if(app.globalData.scene == "场景3"){
+      this.setData({
+        backImg:"../../icon/场景3.png"
+      })
+    }else if(app.globalData.scene == "场景4"){
+      this.setData({
+        backImg:"../../icon/场景4.png"
+      })
+    }
+
+  },
+  
+  getServerData:function(){
+    let Radar={categories:[],series:[]};       
+    Radar.categories = app.globalData.backEndData.RadarPlot.categories;
+    Radar.series = [app.globalData.backEndData.RadarPlot.series];
+    this.setData({
+      describe1:app.globalData.backEndData.EmotionDescribe
+    })
+
+    _self.showRadar("canvasRadar",Radar);
+  },
+
+  showRadar(canvasId,chartData){
+    canvasRadar=new uCharts({
+      $this:_self,
+      canvasId: canvasId,
+      type: 'radar',
+      fontSize:15,
+      legend:{show:true},
+      background:'#FFFFFF',
+      pixelRatio:_self.pixelRatio,
+      animation: true,
+      dataLabel: true,
+      categories: chartData.categories,
+      series: chartData.series,
+      width: this.cWidth,
+      height: this.cHeight,
+      extra: {
+        radar: {
+          max: 10//雷达数值的最大值
+        }
+      }
+    });
+  },
+  ToWordCloud:function(){
+    wx.redirectTo({
+      url: '/pages/wordcloud/wordcloud'
+  })
+  },
+  ToIndex:function(){
+    wx.navigateBack({
+      dalta: 2     // 默认值是 1
+  })
+  },
+  ToScore:function(){
+    wx.redirectTo({
+      url: '/pages/score/score'
+  })
+  }
+})

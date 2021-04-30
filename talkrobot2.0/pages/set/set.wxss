@@ -1,0 +1,83 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+} 
+
+.backImage{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.welcome {
+  margin-top: 150rpx;
+  text-align: center;
+  color: #545454;
+  line-height: 100rpx;
+  font-size: 50rpx;
+  z-index: 1;
+}
+
+.gender {
+  width: 90%;
+  margin-top: 50rpx;
+  z-index: 1;
+  background-color: white;
+  opacity: 0.75;
+}
+
+.scene {
+  width: 90%;
+  margin-top: 50rpx;
+  z-index: 1;
+  background-color: white;
+  opacity: 0.75;
+}
+
+.title {
+  margin-top: 30rpx;
+  margin-bottom: 15rpx;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: #000000;
+  line-height: 100rpx;
+  font-size: 45rpx;
+}
+
+.radio-group{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+}
+
+.radio-group .radio{
+  margin-left: 30rpx;
+  margin-bottom: 25rpx;
+  font-size: 30rpx;
+}
+
+
+.btnView {
+  width: 60%;
+  height: auto;
+}
+ 
+.btn {
+  width: 600rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 35rpx;
+  color: #fff;
+  background: rgb(38, 166, 252);
+  position: fixed;
+  left:75rpx;
+  bottom: 37rpx;
+}
+
+.btn_hover {
+  background-color:rgb(35, 144, 218);
+}

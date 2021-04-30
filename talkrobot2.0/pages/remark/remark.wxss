@@ -1,0 +1,88 @@
+/* pages/remark.wxss */
+.service {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  background: #fff;
+}
+.score {
+  width: 100%;
+  height: 100rpx;
+  border-bottom: 1px solid #ccc;
+}
+.score .left {
+  width: 250rpx;
+  line-height: 100rpx;
+  font-size: 30rpx;
+  float: left;
+}
+.score .right {
+  width: 450rpx;
+  font-size: 30rpx;
+  color: #888;
+  position: absolute;
+  width: 100%;
+  display: inline-block;
+}
+.score .rtxt {
+  display: inline-block;
+  height: 100rpx;
+  line-height: 100rpx;
+  margin-left: 15rpx;
+  color: #c00;
+  font-weight: bold;
+}
+.score .right .stars {
+  float: left;
+  width: 54rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+}
+.score .right .stars .images{
+  position: absolute;
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 30rpx;
+  src: "../../icon/star_normal.png";
+}
+
+.score .right .stars .images .item{
+position: absolute;
+top: 0rpx;
+width: 25px;
+height: 50rpx;
+}
+
+.conts{
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+textarea {
+  width: 687rpx;
+}
+.areas{
+  height:315rpx;
+  font-size: 40rpx;
+  padding-top: 30rpx;
+  margin: 0 auto;
+  overflow: hidden;   
+  position: relative; 
+}
+
+.btn {
+  width: 600rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #fff;
+  background: #c00;
+  position: fixed;
+  left:75rpx;
+  bottom: 37rpx;
+} 
+button:after {
+  border: 0;
+}

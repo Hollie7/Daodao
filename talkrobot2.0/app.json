@@ -1,0 +1,32 @@
+{
+  "pages": [
+    
+    "pages/login/login",
+    "pages/set/set",
+    "pages/register/register",
+    "pages/index/index",
+    "pages/score/score",
+    "pages/radar/radar",
+    "pages/wordcloud/wordcloud",
+    "pages/remark/remark",
+    "pages/voiceText/voiceText",
+    "pages/logs/logs"
+    
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#007fff",
+    "navigationBarTitleText": "Your “叨叨”",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#ffffff"
+  },
+  "plugins": {
+    "WechatSI": {
+      "version": "0.3.4",
+      "provider": "wx069ba97219f66d99"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

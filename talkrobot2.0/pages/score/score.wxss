@@ -1,0 +1,139 @@
+/* pages/score/score.wxss *//* pages/wordcloud.wxss */
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+} 
+
+
+.service {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  background: #fff;
+  
+}
+
+.backImage{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.character{
+  position: absolute;
+  bottom: 100rpx;
+  width: 400rpx;
+  height: 400rpx;
+  opacity: 0.75;
+  z-index: 1;
+}
+
+.score {
+  margin-top: 50rpx;
+  width: 100%;
+  height: 100rpx;
+  border-bottom: 1px solid #ccc;
+  z-index: 2;
+}
+.score .left {
+  width: 30vw;
+  line-height: 100rpx;
+  font-size: 45rpx;
+  float: left;
+}
+.score .mid {
+  width: 30vw;
+  line-height: 100rpx;
+  font-size: 45rpx;
+  float: left;
+  color: rgb(209, 15, 15);
+}
+
+.score .right {
+  width: 30vw;
+  line-height: 100rpx;
+  font-size: 45rpx;
+  float: left;
+}
+
+.remark {
+  margin-top: 10vh;
+  width: 80vw;
+  line-height: 80rpx;
+  font-size: 50rpx;
+  text-align: center;
+  z-index: 2;
+}
+
+.remark2 {
+  margin-top: 5vh;
+  width: 80vw;
+  line-height: 50rpx;
+  font-size: 40rpx;
+  text-align: center;
+  color:rgba(223, 52, 52, 0.918);
+  z-index: 2;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 37rpx;
+  z-index: 2;
+}
+.buttons .btn {
+  width: 30vw;
+  background-color:rgb(144, 230, 245);
+  color: rgb(31, 29, 29);
+  border-radius: 20rpx;
+  font-size: 35rpx;
+}
+
+.buttons .btn_center{
+  width: 30vw;
+  background-color:rgb(144, 230, 245);
+  color: rgb(31, 29, 29);
+  border-radius: 20rpx;
+  font-size: 35rpx;
+  margin-right: 5vw;
+  margin-left: 5vw;
+}
+
+.buttons .btn_hover {
+  background-color:rgb(82, 218, 241);
+}
+
+
+.buttons_wjx {
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5vh;
+  z-index: 2;
+}
+
+.buttons_wjx .btn {
+  width: 40vw;
+  font-family: cursive;
+  background-color:rgb(113, 167, 247);
+  color: #000000;
+  border-radius: 20rpx;
+  font-size: 35rpx;
+}
+
+.buttons_wjx .btn_hover {
+  background-color:rgb(87, 152, 250);
+}

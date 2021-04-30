@@ -1,0 +1,18 @@
+<!--pages/voiceText/voiceText.wxml-->
+<view class="container">
+  <image class="backImage" src="{{backImg}}"></image>
+  <image class="character" src="{{characterImg}}"></image>
+	<view class="service">
+		<view class='left'>语音内容为：</view>
+	</view>
+
+	<view class="conts">
+			<text class="areas">{{text}}</text> 
+	</view>
+	<view class="buttons">
+		<button class="btn" hover-class="btn_hover" bindtap="ToIndex">返回重录</button>
+		<button class="btn_center" hover-class="btn_hover" bindtap="change">开始处理</button>
+		<button class="btn" hover-class="btn_hover" bindtap="ToWordcloud" disabled="{{btn_judge}}">查看结果</button>
+	</view>
+
+</view>
