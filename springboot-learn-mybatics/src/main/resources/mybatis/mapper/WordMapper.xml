@@ -47,4 +47,32 @@
         select * from talkrobot.pos_dict where pos = #{pos}
     </select>
 
+    <!--批量查询读取数据-->
+    <select id="queryWords" resultType="Word">
+        select wordSelf, wordClass, wordMeanNum, wordMeanIndex, emotionClass, emotionIntensity, emotionPolarity
+        from talkrobot.emotionwordlibrary
+        where WordSelf in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and wordMeanIndex = 1
+    </select>
+
+
+    <select id="InverseJudge" resultType="boolean">
+        <![CDATA[ select count(inverse) from talkrobot.inverse_dict where inverse = #{inverse}]]>
+    </select>
+
+    <select id="FindPosNeg" resultType="PosNegWord">
+        select word, WordClass
+        from talkrobot.posneg_dict
+        where word in
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="FindExtent" resultType="ExtentWord">
+        select * from talkrobot.extent_dict where word = #{word}
+    </select>
 </mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzb.hello.mapper.SceneSetMapper">
+    <select id="find" parameterType="String" resultType="SceneSet">
+        select nickName,gender,scene from talkrobot.login where nickName = #{nickName}
+    </select>
+
+    <update id="update" parameterType="SceneSet">
+        update talkrobot.login set gender=#{gender},scene=#{scene} where nickName=#{nickName}
+    </update>
+
+</mapper>

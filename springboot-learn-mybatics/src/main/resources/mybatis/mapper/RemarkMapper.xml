@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzb.hello.mapper.RemarkMapper">
+    <select id="find" parameterType="String" resultType="Remark">
+        select * from talkrobot.remark where nickName = #{nickName}
+    </select>
+
+    <insert id="addRemark" parameterType="Remark" useGeneratedKeys="true" keyProperty="id">
+        insert into talkrobot.remark(nickName,total,accuracy,ontime,fluency,text) values(#{nickName},#{total},#{accuracy},#{ontime},#{fluency},#{text})
+    </insert>
+
+    <update id="update" parameterType="Remark" >
+        update talkrobot.remark set total=#{total},accuracy=#{accuracy},ontime=#{ontime},fluency=#{fluency},text=#{text} where nickName=#{nickName}
+    </update>
+</mapper>

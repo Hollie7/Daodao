@@ -53,7 +53,8 @@ public class Evaluate {
 
         //long time1 = System.currentTimeMillis();
 
-        for (int i = 1; i < wordsSize; i++){
+
+        /*for (int i = 1; i < wordsSize; i++){
             preWord = wordsDivided[i-1];
             emotionWord = wordsDivided[i];
 
@@ -68,11 +69,27 @@ public class Evaluate {
                 NegWords.add(emotionWord);
                 PreNegWords.add(preWord);
             }
+        }*/
+
+        for (int i = 1; i < wordsSize; i++){
+            preWord = wordsDivided[i-1];
+            emotionWord = wordsDivided[i];
+
+            //筛选分词中的neg、pos词语
+            PosWord pos = wordMapper.findPosWord(emotionWord);
+            if(pos != null){
+                PosWords.add(emotionWord);
+                PrePosWords.add(preWord);
+            }
+            else{
+                NegWord neg = wordMapper.findNegWord(emotionWord);
+                if(neg != null){
+                    NegWords.add(emotionWord);
+                    PreNegWords.add(preWord);
+                }
+            }
         }
 
-        //long time2 = System.currentTimeMillis();
-        //int time = (int) ((time2 - time1)/1000);
-        //System.out.println("执行了："+time+"秒！");
 
         //类型转换
         String[] Poses=PosWords.toArray(new String[0]);
@@ -99,12 +116,20 @@ public class Evaluate {
         String[][] FinalPos = FilterWords.get(0);
         String[][] FinalNeg = FilterWords.get(1);
         double score = 0;
+
+        long time1 = System.currentTimeMillis();
+
         for (int i = 0; i < FinalPos[0].length; i++) {
             score += 1 * Evaluate.WeightPoint(FinalPos[1][i], wordMapper);
         }
         for (int i = 0; i < FinalNeg[0].length; i++) {
             score += (-1) * Evaluate.WeightPoint(FinalNeg[1][i], wordMapper);
         }
+
+        long time2 = System.currentTimeMillis();
+        long time = time2 - time1;
+        System.out.println("算分数执行了："+time+"ms！");
+
         return score;
     }
 
@@ -176,10 +201,16 @@ public class Evaluate {
 
     //使用数组将数据库内容全部读取后，再进行情感词筛选、分类和数目计算
     public static String[][] EmotionClassArray(String[][] SegmentFilter, WordMapper wordMapper){
-        long time1 = System.currentTimeMillis();
+        //long time1 = System.currentTimeMillis();
 
+        long time1 = System.currentTimeMillis();
         //获取数据库所有数据
         List<Word> AllWords = wordMapper.getAllWords();
+
+        long time2 = System.currentTimeMillis();
+        long time = time2 - time1;
+        System.out.println("读取所有数据执行了："+time+"ms！");
+
         String[][] AllWordsString = new String[7][AllWords.size()];
         //List转为String二维数组
         for (int i = 0; i < AllWords.size(); i++) {
@@ -194,7 +225,7 @@ public class Evaluate {
         //System.out.println(AllWordsString[0].length+" "+AllWordsString.length);
 
         int WordSum = SegmentFilter[0].length;
-        System.out.println(WordSum);
+        //System.out.println(WordSum);
         //List<Word> selectWord = wordMapper.queryWordByWord("阻力");
         //String selectWord = "";
         List<String> EmoClass = new ArrayList<>();
@@ -227,24 +258,92 @@ public class Evaluate {
             }
         }
 
-        long time2 = System.currentTimeMillis();
-        long time = time2 - time1;
-        System.out.println("执行了："+time+"ms！");
 
         String[] temp1 = EmoClass.toArray(new String[0]);
         String[] temp2 = inverseWords.toArray(new String[0]);
-        String[][] WordsEmotionClass = Segment.WordSort(temp1);
+        String[][] EmotionClassTemp = Segment.WordSort(temp1);
         String[][] Inverse = Segment.WordSort(temp2);
         for (int i = 0; i < Inverse[0].length; i++) {
-            for (int j = 0; j < WordsEmotionClass[0].length; j++) {
-                if(Inverse[0][i].equals(WordsEmotionClass[0][j])){
-                    int num = Integer.parseInt(WordsEmotionClass[1][j]) - Integer.parseInt(Inverse[1][i]);
-                    WordsEmotionClass[1][j] = ""+num;
+            for (int j = 0; j < EmotionClassTemp[0].length; j++) {
+                if(Inverse[0][i].equals(EmotionClassTemp[0][j])){
+                    int num = Integer.parseInt(EmotionClassTemp[1][j]) - Integer.parseInt(Inverse[1][i]);
+                    EmotionClassTemp[1][j] = ""+num;
                 }
             }
         }
         //System.out.println(Arrays.toString(Inverse[0]));
-        FinalSort(WordsEmotionClass);
+        FinalSort(EmotionClassTemp);
+
+        String[][] WordsEmotionClass = new String[3][EmotionClassTemp[0].length];
+        WordsEmotionClass[0] = EmotionClassTemp[0];
+        WordsEmotionClass[1] = EmotionClassTemp[1];
+        for (int i = 0; i < EmotionClassTemp[0].length; i++) {
+            switch (EmotionClassTemp[0][i]) {
+                case "PA":
+                    WordsEmotionClass[2][i] = "快乐";
+                    break;
+                case "PE":
+                    WordsEmotionClass[2][i] = "安心";
+                    break;
+                case "PD":
+                    WordsEmotionClass[2][i] = "尊敬";
+                    break;
+                case "PH":
+                    WordsEmotionClass[2][i] = "赞扬";
+                    break;
+                case "PG":
+                    WordsEmotionClass[2][i] = "相信";
+                    break;
+                case "PB":
+                    WordsEmotionClass[2][i] = "喜爱";
+                    break;
+                case "PK":
+                    WordsEmotionClass[2][i] = "祝愿";
+                    break;
+                case "NA":
+                    WordsEmotionClass[2][i] = "愤怒";
+                    break;
+                case "NB":
+                    WordsEmotionClass[2][i] = "悲伤";
+                    break;
+                case "NJ":
+                    WordsEmotionClass[2][i] = "失望";
+                    break;
+                case "NH":
+                    WordsEmotionClass[2][i] = "内疚";
+                    break;
+                case "PF":
+                    WordsEmotionClass[2][i] = "思";
+                    break;
+                case "NI":
+                    WordsEmotionClass[2][i] = "慌";
+                    break;
+                case "NC":
+                    WordsEmotionClass[2][i] = "恐惧";
+                    break;
+                case "NG":
+                    WordsEmotionClass[2][i] = "羞";
+                    break;
+                case "NE":
+                    WordsEmotionClass[2][i] = "烦闷";
+                    break;
+                case "ND":
+                    WordsEmotionClass[2][i] = "憎恶";
+                    break;
+                case "NN":
+                    WordsEmotionClass[2][i] = "贬责";
+                    break;
+                case "NK":
+                    WordsEmotionClass[2][i] = "妒忌";
+                    break;
+                case "NL":
+                    WordsEmotionClass[2][i] = "怀疑";
+                    break;
+                case "PC":
+                    WordsEmotionClass[2][i] = "惊奇";
+                    break;
+            }
+        }
         return WordsEmotionClass;
     }
 
@@ -297,7 +396,7 @@ public class Evaluate {
         LargeEmotion[0][2] = "怒";
         LargeEmotion[0][3] = "哀";
         LargeEmotion[0][4] = "惧";
-        LargeEmotion[0][5] = "恶";
+        LargeEmotion[0][5] = "恶（wù）";
         LargeEmotion[0][6] = "惊";
 
         for (int i = 0; i < num; i++) {
@@ -396,9 +495,9 @@ public class Evaluate {
         LargeEmotion[1][4] = "" + LargeNum[4];
         LargeEmotion[1][5] = "" + LargeNum[5];
         LargeEmotion[1][6] = "" + LargeNum[6];
-        for (int i = 0; i < 7; i++) {
-            System.out.println(LargeNum[i]);
-        }
+//        for (int i = 0; i < 7; i++) {
+//            System.out.println(LargeNum[i]);
+//        }
 
         FinalSort(LargeEmotion);
         String Describe;
@@ -426,6 +525,209 @@ public class Evaluate {
         }
         return Describe;
     }
+
+    public static String[][] SqlTest(String[][] SegmentFilter, WordMapper wordMapper){
+        //批量读取数据库，筛选情感词（乱序、无重复）
+        String[][] WordsList = Segment.WordSort(SegmentFilter[0]);
+        List<Word> EmotionWords = wordMapper.queryWords(WordsList[0]);
+
+        //对所有情感词按顺序排列，得到情感词的前置词，情感类型分类
+        List<String> EmoClass = new ArrayList<>();
+        List<String> inverseWords = new ArrayList<>();
+        for (int i = 2; i < SegmentFilter[0].length; i++) {
+            for(Word word: EmotionWords){
+                if(SegmentFilter[0][i].equals(word.wordSelf)){
+                    String WordClass = word.emotionClass;
+                    EmoClass.add(WordClass);
+                    if ((wordMapper.InverseJudge(SegmentFilter[0][i-1]) || wordMapper.InverseJudge(SegmentFilter[0][i-2]))) {
+                        inverseWords.add(WordClass);
+                    }
+                    break;
+                }
+            }
+        }
+
+        String[] temp1 = EmoClass.toArray(new String[0]);
+        String[] temp2 = inverseWords.toArray(new String[0]);
+        String[][] EmotionClassTemp = Segment.WordSort(temp1);
+        String[][] Inverse = Segment.WordSort(temp2);
+        for (int i = 0; i < Inverse[0].length; i++) {
+            for (int j = 0; j < EmotionClassTemp[0].length; j++) {
+                if(Inverse[0][i].equals(EmotionClassTemp[0][j])){
+                    int num = Integer.parseInt(EmotionClassTemp[1][j]) - Integer.parseInt(Inverse[1][i]);
+                    EmotionClassTemp[1][j] = ""+num;
+                }
+            }
+        }
+        FinalSort(EmotionClassTemp);
+
+        String[][] WordsEmotionClass = new String[3][EmotionClassTemp[0].length];
+        WordsEmotionClass[0] = EmotionClassTemp[0];
+        WordsEmotionClass[1] = EmotionClassTemp[1];
+        for (int i = 0; i < EmotionClassTemp[0].length; i++) {
+            switch (EmotionClassTemp[0][i]) {
+                case "PA":
+                    WordsEmotionClass[2][i] = "快乐";
+                    break;
+                case "PE":
+                    WordsEmotionClass[2][i] = "安心";
+                    break;
+                case "PD":
+                    WordsEmotionClass[2][i] = "尊敬";
+                    break;
+                case "PH":
+                    WordsEmotionClass[2][i] = "赞扬";
+                    break;
+                case "PG":
+                    WordsEmotionClass[2][i] = "相信";
+                    break;
+                case "PB":
+                    WordsEmotionClass[2][i] = "喜爱";
+                    break;
+                case "PK":
+                    WordsEmotionClass[2][i] = "祝愿";
+                    break;
+                case "NA":
+                    WordsEmotionClass[2][i] = "愤怒";
+                    break;
+                case "NB":
+                    WordsEmotionClass[2][i] = "悲伤";
+                    break;
+                case "NJ":
+                    WordsEmotionClass[2][i] = "失望";
+                    break;
+                case "NH":
+                    WordsEmotionClass[2][i] = "内疚";
+                    break;
+                case "PF":
+                    WordsEmotionClass[2][i] = "思";
+                    break;
+                case "NI":
+                    WordsEmotionClass[2][i] = "慌";
+                    break;
+                case "NC":
+                    WordsEmotionClass[2][i] = "恐惧";
+                    break;
+                case "NG":
+                    WordsEmotionClass[2][i] = "羞";
+                    break;
+                case "NE":
+                    WordsEmotionClass[2][i] = "烦闷";
+                    break;
+                case "ND":
+                    WordsEmotionClass[2][i] = "憎恶";
+                    break;
+                case "NN":
+                    WordsEmotionClass[2][i] = "贬责";
+                    break;
+                case "NK":
+                    WordsEmotionClass[2][i] = "妒忌";
+                    break;
+                case "NL":
+                    WordsEmotionClass[2][i] = "怀疑";
+                    break;
+                case "PC":
+                    WordsEmotionClass[2][i] = "惊奇";
+                    break;
+            }
+        }
+
+        return WordsEmotionClass;
+
+    }
+
+    public static double WordFilterPosNeg(String[] InitialSegment, String[] FinalSegment, WordMapper wordMapper){
+        //批量读取数据库，筛选情感词（乱序、无重复）
+        List<PosNegWord> PosNegs = wordMapper.FindPosNeg(FinalSegment);
+
+        //对所有情感词按顺序排列，得到情感词的前置词，情感类型分类
+        //List<String> EmoClass = new ArrayList<>();
+        //List<String> inverseWords = new ArrayList<>();
+        double score = 0;
+        for (int i = 2; i < InitialSegment.length; i++) {
+            for(PosNegWord posNeg : PosNegs){
+                if(InitialSegment[i].trim().equals(posNeg.word.trim())){
+                    double ExtentScore1 = 0;
+                    double ExtentScore2 = 0;
+                    double ExtentWord = 0;
+                    if("pos".equals(posNeg.WordClass)){
+                        ExtentWord = 1;
+                    }
+                    else if("neg".equals(posNeg.WordClass)){
+                        ExtentWord = -1;
+                    }
+
+                    String pre1, pre2;
+                    if(wordMapper.FindExtent(InitialSegment[i-1]) != null){
+                        pre1 = wordMapper.FindExtent(InitialSegment[i-1]).Extent;
+                    }
+                    else{ pre1 = ""; }
+                    if(wordMapper.FindExtent(InitialSegment[i-2]) != null){
+                        pre2 = wordMapper.FindExtent(InitialSegment[i-2]).Extent;
+                    }
+                    else{ pre2 = ""; }
+
+                    //System.out.println(pre1 + " " + pre2);
+                    switch (pre1){
+                        case "most":
+                            ExtentScore1 = 2;
+                            break;
+                        case "over":
+                            ExtentScore1 = 1.5;
+                            break;
+                        case "very":
+                            ExtentScore1 = 1.25;
+                            break;
+                        case "more":
+                            ExtentScore1 = 1.2;
+                            break;
+                        case "ish":
+                            ExtentScore1 = 0.8;
+                            break;
+                        case "insufficiently":
+                            ExtentScore1 = 0.5;
+                            break;
+                        case "inverse":
+                            ExtentScore1 = -1;
+                            break;
+                        default:
+                            ExtentScore1 = 1;
+                    }
+                    switch (pre2){
+                        case "most":
+                            ExtentScore2 = 2;
+                            break;
+                        case "over":
+                            ExtentScore2 = 1.5;
+                            break;
+                        case "very":
+                            ExtentScore2 = 1.25;
+                            break;
+                        case "more":
+                            ExtentScore2 = 1.2;
+                            break;
+                        case "ish":
+                            ExtentScore2 = 0.8;
+                            break;
+                        case "insufficiently":
+                            ExtentScore2 = 0.5;
+                            break;
+                        case "inverse":
+                            ExtentScore2 = -1;
+                            break;
+                        default:
+                            ExtentScore2 = 1;
+                    }
+
+                    score += ExtentWord * ExtentScore1 * ExtentScore2;
+                    //System.out.println(posNeg.word + " " + InitialSegment[i-2] + " " + InitialSegment[i-1] + " " + ExtentWord + " " + ExtentScore1 + " " + ExtentScore2);
+                }
+            }
+        }
+
+        return score;
+    }
+
 }
 
 

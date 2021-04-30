@@ -44,4 +44,16 @@ public interface WordMapper {
 
     //依据词语本身在Pos词库中查找该词语
     PosWord findPosWord(String pos);
+
+
+
+    //获取情感词库本体中所有词语
+    List<Word> queryWords(String[] list);
+
+    //依据词语本身在Inverse词库中查找该词语
+    boolean InverseJudge(String word);
+
+    List<PosNegWord> FindPosNeg(String[] words);
+
+    ExtentWord FindExtent(String word);
 }

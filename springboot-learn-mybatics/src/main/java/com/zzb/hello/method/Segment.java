@@ -10,8 +10,6 @@ import java.util.*;
 public class Segment {
     public static String[][] SegmentWord(String str){
         //定义一个int变量，用于存放分词后的词语数目
-        int termsSize;
-
         StopRecognition filter = new StopRecognition();
         filter.insertStopNatures("w"); //过滤词性
         filter.insertStopNatures("null");
@@ -31,7 +29,7 @@ public class Segment {
         Result result = DicAnalysis.parse(str).recognition(filter); //分词结果的一个封装，主要是一个List<Term>的terms
 
         List<Term> terms = result.getTerms(); //拿到terms
-        termsSize = terms.size();
+        int termsSize = terms.size();
 
         ArrayList<String> words = new ArrayList<>();
         ArrayList<String> natureStrs = new ArrayList<>();
@@ -39,10 +37,6 @@ public class Segment {
         for (int i=0; i<termsSize; i++){
             String word = terms.get(i).getName(); //拿到词
             String natureStr = terms.get(i).getNatureStr(); //拿到词性
-            /*if("w".equals(natureStr) || "null".equals(natureStr)) {
-                continue;
-            }*/
-
             words.add(word);
             natureStrs.add(natureStr);
             validNum++;
@@ -155,7 +149,7 @@ public class Segment {
 
     public static List<String[]> WordClass(String[][] wordsDivided){
         int wordsSize = wordsDivided[0].length;
-        System.out.println(wordsSize);
+        //System.out.println(wordsSize);
 
         List<String> NounWords = new ArrayList<>();
         List<String> VerbWords = new ArrayList<>();
@@ -289,7 +283,7 @@ public class Segment {
             if("an".equals(natureStr) || "a".equals(natureStr) || "Ag".equals(natureStr) || "ad".equals(natureStr) ){
                 Words.add(word);
                 NatureStrs.add("adj");
-                System.out.println(word+" "+natureStr);
+                //System.out.println(word+" "+natureStr);
             }
             //名词
             else if("Ng".equals(natureStr) || "n".equals(natureStr) || "nr".equals(natureStr) ||
@@ -297,32 +291,32 @@ public class Segment {
                     "nz".equals(natureStr) ){
                 Words.add(word);
                 NatureStrs.add("noun");
-                System.out.println(word+" "+natureStr);
+                //System.out.println(word+" "+natureStr);
             }
             //动词
             else if("v".equals(natureStr) || "vd".equals(natureStr) || "Vg".equals(natureStr) || "vn".equals(natureStr)){
                 Words.add(word);
                 NatureStrs.add("verb");
-                System.out.println(word+" "+natureStr);
+                //System.out.println(word+" "+natureStr);
             }
             //副词
             else if("d".equals(natureStr) || "Dg".equals(natureStr)){
                 Words.add(word);
                 NatureStrs.add("adv");
-                System.out.println(word+" "+natureStr);
+                //System.out.println(word+" "+natureStr);
             }
             //数词与时间
             else if("m".equals(natureStr) || "mg".equals(natureStr) || "mq".equals(natureStr) || "t".equals(natureStr) ||
                     "tg".equals(natureStr) || "q".equals(natureStr)){
                 Words.add(word);
                 NatureStrs.add("num_time");
-                System.out.println(word+" "+natureStr);
+                //System.out.println(word+" "+natureStr);
             }
             //成语或代词
             else if("i".equals(natureStr) || "r".equals(natureStr)){
                 Words.add(word);
                 NatureStrs.add("idiom");
-                System.out.println(word+" "+natureStr);
+                //System.out.println(word+" "+natureStr);
             }
         }
 
