@@ -4,10 +4,12 @@
   <image class="character" src="{{characterImg}}"></image>
   <view class="buttons">
     <view class="buttons">
-      <button class="btn1" hover-class="btn1_hover" bindtouchstart="touchStart" bindtouchend="touchEnd"> 
+      <button class="btn1" bindtap="startFunc" disabled="{{disableStart}}" hover-class="btn1_hover"> 
         <image class="btnImg" src="../../icon/luyin_1.png"></image>
         <view>录音</view>
       </button>
+      <button class="btn2" type="primary" bindtap="pauseFunc" disabled="{{disablePause}}" size="mini">{{SusOrCon}}</button>
+      <button class="btn2" type="primary" bindtap="stopFunc" disabled="{{disableStop}}" size="mini">停止</button>
       <!--<button class="btn2" hover-class="btn2_hover" bindtap="change">开始分析</button>
       
       <button class="btn2" hover-class="btn2_hover" bindtap="ToWordcloud" disabled="{{btn3_judge}}">查看结果</button>-->

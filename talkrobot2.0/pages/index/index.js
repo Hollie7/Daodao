@@ -15,13 +15,13 @@ manager.onRecognize = res=>{
 }
 manager.onStop = res=>{
   let text = res.result
-  app.globalData.voice_text = res.result  
-  console.log(res)
+  app.globalData.voice_text += res.result  
+  console.log(app.globalData.voice_text)
   if(text==''){
     console.log('用户没有说话')
     wx.showToast({
-    icon:'none',
-    title: '未识别',
+      icon:'none',
+      title: '未识别',
     })
   }
   else{
@@ -30,8 +30,8 @@ manager.onStop = res=>{
 }
 manager.onError = function (res) {
   wx.showToast({
-  icon:'none',
-  title: '报错了',
+    icon:'none',
+    title: '报错了',
   })
 }
 
@@ -45,7 +45,13 @@ Page({
     tempData:null,
     btn_voice_judge:app.globalData.index_btn_voice_judge,
     backImg:null,
-    characterImg:null
+    characterImg:null,
+    disableStart:false,
+    disablePause:true,
+    disableStop:true,
+    SusOrCon:"暂停",
+    SusOrConArray:["暂停","继续"],
+    SusOrConIndex:1,
   },
   bindViewTap: function() {
     wx.navigateTo({
@@ -116,22 +122,60 @@ Page({
       hasUserInfo: true
     })
   },
-  touchStart(){
+  startFunc:function(e){
+    this.setData({
+      disableStart:true,
+      disablePause:false,
+      disableStop:false
+    }),
+    // 控制
     manager.start({
-    lang: 'zh_CN',
-    duration:60000
+      lang: 'zh_CN',
+      duration:60000
     })
+    //console.log("stop",disableStop)
   },
-  touchEnd(){
+  pauseFunc:function(e){
+    this.setData({
+      SusOrConIndex:(this.data.SusOrConIndex+1)%2,
+      SusOrCon:this.data.SusOrConArray[this.data.SusOrConIndex],
+      disableStop:false
+    })
+    console.log("stop")
+    console.log("SusOrConIndex",this.data.SusOrConIndex)
+    // 控制
+    if(this.data.SusOrConIndex == 1){
+      // 继续
+      manager.start({
+        lang: 'zh_CN',
+        duration:60000
+      })
+    }
+    else{  
+      // 暂停
+      app.globalData.index_btn_voice_judge = false
+      this.setData({
+        btn_voice_judge:app.globalData.index_btn_voice_judge
+      })
+      manager.stop() 
+      app.globalData.voice_text 
+    }
+  },
+  stopFunc:function(e){
+    this.setData({
+      SusOrConIndex:1,
+      SusOrCon:'暂停',
+      disableStart:false,
+      disablePause:true,
+      disableStop:true
+    }),
+    // 控制
     app.globalData.index_btn_voice_judge = false
     this.setData({
       btn_voice_judge:app.globalData.index_btn_voice_judge
-    }
-    )
+    })
     manager.stop() 
-  },
-
-
+  },  
   change: function(){
     if(app.globalData.voice_text){
       this.setData({
