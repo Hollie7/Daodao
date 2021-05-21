@@ -15,10 +15,9 @@
 
 .character{
   position: absolute;
-  bottom: 100rpx;
-  width: 400rpx;
-  height: 400rpx;
-  opacity: 0.75;
+  bottom: 0rpx;
+  width: 486rpx;
+  height: 972rpx;
   z-index: 1;
 }
 

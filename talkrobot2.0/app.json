@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/login/login",
     "pages/set/set",
     "pages/register/register",
@@ -10,8 +9,9 @@
     "pages/wordcloud/wordcloud",
     "pages/remark/remark",
     "pages/voiceText/voiceText",
+    "pages/result/result",
+    "pages/recommend/recommend",
     "pages/logs/logs"
-    
     
   ],
   "window": {

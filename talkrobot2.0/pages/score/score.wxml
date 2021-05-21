@@ -19,7 +19,7 @@
 			</view>
 		</view>
 
-		<!--评价与建议-->
+		<!--评价与建议
 		<view class='remark'>
 			<text>{{describe1}}</text>
 		</view>
@@ -38,14 +38,15 @@
 			<button class="btn" hover-class="btn_hover" bindtap="Towjx3">焦虑自评量表</button>
 			<button class="btn" hover-class="btn_hover" bindtap="Towjx4">压力知觉量表</button>
 		</view>
-	<!--页面切换buttons-->
+	页面切换buttons-->
 
 	</view>
 
 	<view class="buttons">
-		<button class="btn" hover-class="btn_hover" bindtap="ToWordCloud">词云图</button>
-		<button class="btn_center" hover-class="btn_hover" bindtap="ToIndex">返回主页</button>
 		<button class="btn" hover-class="btn_hover" bindtap="ToRadar">情感雷达</button>
+		<button class="btn_center" hover-class="btn_hover" bindtap="ToWordCloud">词云图</button>
+		<button class="btn" disabled="true">情感评分</button>
+
 	</view>
 </view>
 

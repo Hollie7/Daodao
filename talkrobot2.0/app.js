@@ -34,15 +34,15 @@ App({
     })
   },
   globalData: {
-    userInfo: null,
-    voice_text:null,
+    userInfo: '',
+    voice_text:'',
     index_btn_judge:true,
     index_btn_voice_judge:true,
     judge:false,
     backEndData:{"wordCloud":[{"name":"初始","textSize":30},{"name":"初始","textSize":25},{"name":"初始","textSize":20},{"name":"初始","textSize":20},{"name":"初始","textSize":20},{"name":"初始","textSize":15}],"RadarPlot":{"categories":["初始(8)","初始(8)","初始(5)","初始(5)","初始(3)","初始(3)","初始(2)","初始(2)"],"series":{"name":"情绪特征雷达图","data":["8","8","5","5","3","3","2","2"]}},"EmotionScore":"0","SentenceLength":10},
 
-    name:null,
-    gender:null,
-    scene:null,
+    name:'',
+    gender:'',
+    scene:'',
   }
 })

@@ -1,0 +1,18 @@
+<view class="container">
+	<image class="backImage" src="{{backImg}}"></image>
+  <image class="character" src="{{characterImg}}"></image>
+  <view class='welcome'>
+		<text>如有需要，可填写下方的四个心理量表，获取具体心理干预材料！</text>
+	</view>
+  <view class="buttons">
+    <view class="buttons_wjx">
+      <button class="btn" hover-class="btn_hover" bindtap="Towjx1" >抑郁自评量表</button>
+      <button class="btn" hover-class="btn_hover" bindtap="Towjx2" >强迫自评量表</button>
+    </view>
+
+    <view class="buttons_wjx">
+      <button class="btn" hover-class="btn_hover" bindtap="Towjx3">焦虑自评量表</button>
+      <button class="btn" hover-class="btn_hover" bindtap="Towjx4">压力知觉量表</button>
+    </view>
+  </view>
+</view>

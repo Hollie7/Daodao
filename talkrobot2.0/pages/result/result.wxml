@@ -1,0 +1,21 @@
+<view class="container" style="width:100vw; height:100vh">
+  <image class="backImage" src="{{backImg}}"></image>
+  <image class="character" src="{{characterImg}}"></image>
+  <view class="buttons_top">
+    <view class='goto_left' ><navigator url='/pages/index/index'>返回主页</navigator> </view>
+    <view class='goto_right'><navigator url='/pages/voiceText/voiceText'>查看语音</navigator> </view>
+  </view>
+
+  <view class="buttons">
+    <view class="buttons_mid">
+      <button class='btn' hover-class="btn_hover" bindtap="ToRadar">情感雷达</button>
+      <button class='btn' hover-class="btn_hover" bindtap="ToWordCloud">词云图</button>
+    </view>
+
+    <view class="buttons_mid">
+      <button class='btn' hover-class="btn_hover" bindtap="ToScore">情感评分</button>
+      <button class='btn' hover-class="btn_hover" bindtap="ToRemarkWjx">评价问卷</button>
+    </view>
+  </view>
+  <view class='goto_bot'><navigator url='/pages/recommend/recommend'>点击获取更多相关评测与改善情绪建议！</navigator> </view>
+</view>

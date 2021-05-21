@@ -75,7 +75,7 @@ Page({
               success: function (re) {
                 app.globalData.gender = re.data.gender
                 app.globalData.scene = re.data.scene
-                if(app.globalData.gender == null || app.globalData.scene == null){
+                if(app.globalData.gender == '' || app.globalData.scene == ''){
                   wx.navigateTo({
                     url: '/pages/set/set'
                   })

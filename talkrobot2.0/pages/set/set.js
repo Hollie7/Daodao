@@ -4,10 +4,10 @@ Page({
 
   data: {
     gendersRadio: [
-      {value: '男'},{value: '女'}
+      {value: '男'},{value: '女'},{value: '保密'}
     ],
     scenesRadio: [
-      {value: '场景1'},{value: '场景2'},{value: '场景3'},{value: '场景4'}
+      {value: '白天室外'},{value: '黑天室内'}
     ],
     partGender:null,
     partScene:null

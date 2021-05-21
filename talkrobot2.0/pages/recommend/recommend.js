@@ -1,25 +1,13 @@
+// pages/recommend/recommend.js
 const app = getApp()
-import uCharts from '../uchart/u-charts.js';
-var _self;
-
 Page({
+
   data: {
-    cWidth:'',
-    cHeight:'',
-    pixelRatio:1,
-    score1:0,
-    describe1:'',
-    backImg:null,
-    characterImg:null
+    backImg:'',
+    characterImg:''
   },
 
-  onLoad: function () {
-    _self=this;
-    this.cWidth = wx.getSystemInfoSync().windowWidth;
-    this.cHeight = 750 / 750 * wx.getSystemInfoSync().windowWidth;
-    this.getServerData();
-    this.judgeDescribe();
-
+  onLoad: function (options) {
     if(app.globalData.gender == "男"){
       this.setData({
         characterImg:"../../icon/boy.png"
@@ -43,53 +31,16 @@ Page({
         backImg:"../../icon/nightin.jpg"
       })
     }
-  },
-  
- 
-  getServerData:function(){
-    this.setData({
-      score1:(app.globalData.backEndData.EmotionScore/app.globalData.backEndData.SentenceLength*100).toFixed(2),
-      //describe1:app.globalData.backEndData.EmotionDescribe
-    })
-  },
 
-  judgeDescribe:function(){
-    if(this.data.score1>=0){
+    if(app.globalData.voice_text == ''){
       this.setData({
-        describe1:"您的情绪相对稳定且趋于乐观正面，请继续保持良好的情绪与心态"
+        btn_judge_done:true
+      })
+    } else {
+      this.setData({
+        btn_judge_done:false
       })
     }
-    else if(this.data.score1>=-1){
-      this.setData({
-        describe1:"您的情绪相对稳定但是较为消极，请及时调整情绪与心情"
-      })
-    }
-    else if(this.data.score1>=-2){
-      this.setData({
-        describe1:"您的情绪比较消极且可能存在恶化的情况，请及时调整情绪与心情，必要时请及时进行心理咨询与疏导"
-      })
-    }
-    else{
-      this.setData({
-        describe1:"您的情绪很消极，请及时进行心理咨询与疏导"
-      })
-    }
-  },
-
-  ToRadar:function(){
-    wx.redirectTo({
-      url: '/pages/radar/radar'
-  })
-  },
-  ToIndex:function(){
-    wx.navigateBack({
-      dalta: 2     // 默认值是 1
-  })
-  },
-  ToWordCloud:function(){
-    wx.redirectTo({
-      url: '/pages/wordcloud/wordcloud'
-  })
   },
 
   Towjx1:function(){

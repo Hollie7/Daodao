@@ -3,7 +3,6 @@ const app = getApp()
 Page({
 
   data: {
-    btn_judge:app.globalData.index_btn_judge,
     /*text:"最近一段时间，大概从 12 月开始的，情绪特别低落，12 月是觉得不开心和沮丧，1 月份以来的最近几天，每天都会哭，" +
         "不知道为什么，莫名就觉得孤单，被抛弃，自己一无是处。以前情绪不好的时候，哭过一次大概就好了，三天前，因为觉得特别孤独，又没人可以说，" +
         "特别难过，哭了一个晚上，但是第二天，电话里，男票的一句很普通的话戳中了我，他说——下学期准备考驾照，反正你也不想考。我瞬间就有被抛弃的感觉了，" +
@@ -12,9 +11,11 @@ Page({
         "这几天几乎每天都要哭，还是觉得情绪里有无穷无尽的悲伤，低沉地我不知道怎么办了，我性格本来就有点内向，不能尽情开心，压抑着自己的那种，" +
         "平常大多是不高兴也不悲伤的情绪，看过一些心理学的书，怀疑自己可能有神经症，大一暑假去号脉的时候，医生说我有神经官能紊乱，那时候就有点不开心，" +
         "现在情绪的情况这样，要不要去看医生吃药？真的好难受啊。"*/
-    text:null,
-    backImg:null,
-    characterImg:"null"
+    text:'',
+    backImg:'',
+    characterImg:'',
+    btn_judge_done:true,
+    btn_judge_result:true
   },
 
   onLoad: function(){
@@ -26,27 +27,33 @@ Page({
       this.setData({
         characterImg:"../../icon/boy.png"
       })
-    }else{
+    }else if(app.globalData.gender == "女"){
       this.setData({
         characterImg:"../../icon/girl.png"
       })
+    }else if(app.globalData.gender == "保密"){
+      this.setData({
+        characterImg:"../../icon/gendersecret.png"
+      })
     }
 
-    if(app.globalData.scene == "场景1"){
+    if(app.globalData.scene == "白天室外"){
       this.setData({
-        backImg:"../../icon/scene1.png"
+        backImg:"../../icon/dayout.jpg"
       })
-    }else if(app.globalData.scene == "场景2"){
+    }else if(app.globalData.scene == "黑天室内"){
       this.setData({
-        backImg:"../../icon/scene2.png"
+        backImg:"../../icon/nightin.jpg"
       })
-    }else if(app.globalData.scene == "场景3"){
+    }
+
+    if(app.globalData.voice_text == ''){
       this.setData({
-        backImg:"../../icon/scene3.png"
+        btn_judge_done:true
       })
-    }else if(app.globalData.scene == "场景4"){
+    } else {
       this.setData({
-        backImg:"../../icon/scene4.png"
+        btn_judge_done:false
       })
     }
   },
@@ -56,14 +63,17 @@ Page({
       dalta: 3     // 默认值是 1
   })
   },
-  ToWordcloud:function(){
+  ToResult:function(){
     wx.navigateTo({
-      url: '/pages/wordcloud/wordcloud'
+      url: '/pages/result/result'
   })
   },
 
   change: function(){
     var that = this;
+    this.setData({
+      btn_judge_done:true
+    })
     wx.request({
       url: 'https://www.talkrobot.top/Test',
       /*url: 'http://localhost:9000/Test',*/
@@ -91,7 +101,7 @@ Page({
         app.globalData.backEndData = res.data
         app.globalData.index_btn_judge = false
         that.setData({
-          btn_judge:app.globalData.index_btn_judge,
+          btn_judge_result:false,
         }
         )
       }

@@ -9,7 +9,6 @@ Page({
     cWidth:'',
     cHeight:'',
     pixelRatio:1,
-    score1:0,
   },
 
   onLoad: function () {
@@ -23,10 +22,6 @@ Page({
   getServerData:function(){
     let Word={series:[]};
     Word.series = app.globalData.backEndData.wordCloud;
-    this.setData({
-      score1:app.globalData.backEndData.EmotionScore
-    })
-    console.log(Word);
     _self.showWord("canvasWord",Word);
   },
 

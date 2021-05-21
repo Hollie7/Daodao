@@ -2,20 +2,20 @@
 <view class="container" style="width:100vw; height:100vh">
   <image class="backImage" src="{{backImg}}"></image>
   <image class="character" src="{{characterImg}}"></image>
-  <view class="buttons">
-    <view class="buttons">
-      <button class="btn1" bindtap="startFunc" disabled="{{disableStart}}" hover-class="btn1_hover"> 
-        <image class="btnImg" src="../../icon/luyin_1.png"></image>
-        <view>录音</view>
-      </button>
-      <button class="btn2" type="primary" bindtap="pauseFunc" disabled="{{disablePause}}" size="mini">{{SusOrCon}}</button>
-      <button class="btn2" type="primary" bindtap="stopFunc" disabled="{{disableStop}}" size="mini">停止</button>
-      <!--<button class="btn2" hover-class="btn2_hover" bindtap="change">开始分析</button>
-      
-      <button class="btn2" hover-class="btn2_hover" bindtap="ToWordcloud" disabled="{{btn3_judge}}">查看结果</button>-->
-      <button class="btn2" hover-class="btn2_hover" bindtap="ToVoice" >查看语音</button>
-      <button class="btn2" hover-class="btn2_hover" bindtap="Reset">Reset</button>
-      <button class="btn2" hover-class="btn2_hover" bindtap="ToRemark">评价</button>
-    </view>
+  <view class="buttons_top">
+    <view class='goto_left'><navigator url='/pages/voiceText/voiceText'>查看语音</navigator> </view>
+    <view class='goto_right'><navigator url='/pages/remark/remark'>评价</navigator> </view>
+  </view>
+  <view class="buttons_bot">
+    <!--<button class="btn_bot" bindtap="pauseFunc" disabled="{{disablePause}}">{{SusOrCon}}</button>-->
+    <button class="btn_bot" bindtap="stopFunc" disabled="{{disableStop}}">停止</button>
+
+    <button class="btn_circle" bindtap="pauseFunc">
+      <image class="btnImg" src="{{SusOrCon}}"></image>
+    </button>
+
+    <button class="btn_bot" bindtap="Reset">重置</button>
+    <!--<button class="btn2" hover-class="btn2_hover" bindtap="change">开始分析</button>-->
+    
   </view>
 </view>
